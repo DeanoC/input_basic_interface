@@ -285,4 +285,8 @@ AL2O3_EXTERN_C uint32_t InputBasic_GetPadCount(InputBasic_ContextHandle handle);
 AL2O3_EXTERN_C InputBasic_PadHandle InputBasic_PadCreate(InputBasic_ContextHandle handle, uint32_t index);
 AL2O3_EXTERN_C void InputBasic_PadDestroy(InputBasic_PadHandle handle);
 
+
+// platform specific process message call
+// on windows should be passed msgs from the windows proc loop
+AL2O3_EXTERN_C void InputBasic_PlatformProcessMsg(InputBasic_ContextHandle handle, void* msg);
 #endif
