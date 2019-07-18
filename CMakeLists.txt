@@ -16,12 +16,11 @@ project(${LibName})
 set(Interface
 		input.h
 		)
-set(Src
-		)
 
 set(Deps
 		al2o3_platform
 		)
-ADD_LINK_TIME_INTERFACE(${BaseInterfaceName} "${Interface}" "${Src}" "${Deps}")
+
+ADD_LINK_TIME_INTERFACE(${BaseInterfaceName} "${Interface}" "${Deps}")
 
 
