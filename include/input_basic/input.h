@@ -3,7 +3,6 @@
 #define INPUT_BASIC_INTERFACE_INPUT_H_
 
 typedef struct InputBasic_Context *InputBasic_ContextHandle;
-typedef struct InputBasic_Mapper *InputBasic_MapperHandle;
 
 typedef struct InputBasic_Mouse *InputBasic_MouseHandle;
 typedef struct InputBasic_Keyboard *InputBasic_KeyboardHandle;
@@ -262,16 +261,15 @@ AL2O3_EXTERN_C void InputBasic_Destroy(InputBasic_ContextHandle handle);
 AL2O3_EXTERN_C void InputBasic_SetWindowSize(InputBasic_ContextHandle handle, uint32_t width, uint32_t height);
 AL2O3_EXTERN_C void InputBasic_Update(InputBasic_ContextHandle handle, double deltaTimeInMS);
 
-AL2O3_EXTERN_C InputBasic_MapperHandle InputBasic_GetMapper(InputBasic_ContextHandle handle);
-AL2O3_EXTERN_C void InputBasic_MapToMouseButton(InputBasic_MapperHandle handle, uint32_t userId, InputBasic_MouseHandle mouse, InputBasic_MouseButton button);
-AL2O3_EXTERN_C void InputBasic_MapToKey(InputBasic_MapperHandle handle, uint32_t userId, InputBasic_KeyboardHandle keyboard, InputBasic_Key key);
-AL2O3_EXTERN_C void InputBasic_MapToPadButton(InputBasic_MapperHandle handle, uint32_t userId, InputBasic_PadHandle pad, InputBasic_PadButton button);
+AL2O3_EXTERN_C void InputBasic_MapToMouseButton(InputBasic_ContextHandle handle, uint32_t userId, InputBasic_MouseHandle mouse, InputBasic_MouseButton button);
+AL2O3_EXTERN_C void InputBasic_MapToKey(InputBasic_ContextHandle handle, uint32_t userId, InputBasic_KeyboardHandle keyboard, InputBasic_Key key);
+AL2O3_EXTERN_C void InputBasic_MapToPadButton(InputBasic_ContextHandle handle, uint32_t userId, InputBasic_PadHandle pad, InputBasic_PadButton button);
 
-AL2O3_EXTERN_C void InputBasic_MapToMouseAxis(InputBasic_MapperHandle handle, uint32_t userId, InputBasic_MouseHandle mouse, InputBasic_Axis axis);
-AL2O3_EXTERN_C void InputBasic_MapToPadAxis(InputBasic_MapperHandle handle, uint32_t userId, InputBasic_PadHandle pad, InputBasic_Axis axis);
+AL2O3_EXTERN_C void InputBasic_MapToMouseAxis(InputBasic_ContextHandle handle, uint32_t userId, InputBasic_MouseHandle mouse, InputBasic_Axis axis);
+AL2O3_EXTERN_C void InputBasic_MapToPadAxis(InputBasic_ContextHandle handle, uint32_t userId, InputBasic_PadHandle pad, InputBasic_Axis axis);
 
 AL2O3_EXTERN_C bool InputBasic_GetAsBool(InputBasic_ContextHandle handle, uint32_t userId);
-AL2O3_EXTERN_C float InputBasic_GetAsFloat(InputBasic_MapperHandle handle, uint32_t userId);
+AL2O3_EXTERN_C float InputBasic_GetAsFloat(InputBasic_ContextHandle handle, uint32_t userId);
 
 AL2O3_EXTERN_C uint32_t InputBasic_GetMouseCount(InputBasic_ContextHandle handle);
 AL2O3_EXTERN_C InputBasic_MouseHandle InputBasic_MouseCreate(InputBasic_ContextHandle handle, uint32_t index);
@@ -285,6 +283,8 @@ AL2O3_EXTERN_C uint32_t InputBasic_GetPadCount(InputBasic_ContextHandle handle);
 AL2O3_EXTERN_C InputBasic_PadHandle InputBasic_PadCreate(InputBasic_ContextHandle handle, uint32_t index);
 AL2O3_EXTERN_C void InputBasic_PadDestroy(InputBasic_PadHandle handle);
 
+// a User Id block is a space 1000 of id for the callers own evil use
+AL2O3_EXTERN_C uint32_t InputBasic_AllocateUserIdBlock(InputBasic_ContextHandle handle);
 
 // platform specific process message call
 // on windows should be passed msgs from the windows proc loop
